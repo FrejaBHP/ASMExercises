@@ -154,31 +154,6 @@ void Comparison() {
     else {
         cout << "Result is " + to_string(result);
     }
-
-    /* Called ASM is equivalent to:
-    int result;
-    switch (operation) {
-        case 0:
-            result = num1 + num2;
-            break;
-
-        case 1:
-            result = num1 - num2;
-            break;
-
-        case 2:
-            result = num1 * num2;
-            break;
-
-        case 3:
-            result = num1 / num2;
-            divRemainder = num1 % num2;
-            break;
-
-        default:
-            break;
-    }
-    */
 }
 
 void CharCount() {
