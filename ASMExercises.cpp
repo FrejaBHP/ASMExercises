@@ -6,33 +6,32 @@ int main() {
     while (repeat) {
         int option = PromptOption();
 
+        if (option != 0) {
+            std::cout << "\x1b[2J\x1b[H"; // Clears console and resets "cursor"
+        }
+
         switch (option) {
             case 1:
-                std::cout << "\x1b[2J\x1b[H"; // Clears console and resets "cursor"
                 std::cout << "1: Addition\n\n";
                 AdditionOperations();
                 break;
 
             case 2:
-                std::cout << "\x1b[2J\x1b[H";
                 std::cout << "2: General integer arithmetic\n\n";
                 Comparison();
                 break;
 
             case 3:
-                std::cout << "\x1b[2J\x1b[H";
                 std::cout << "3: Character counting\n\n";
                 CharCount();
                 break;
 
             case 4:
-                std::cout << "\x1b[2J\x1b[H";
                 std::cout << "4: Bubblesort\n\n";
                 BubbleSort();
                 break;
 
             case 5:
-                std::cout << "\x1b[2J\x1b[H";
                 std::cout << "5: Floating point multiplication\n\n";
                 FPArithmetic();
                 break;
@@ -44,7 +43,7 @@ int main() {
                 break;
         }
 
-        if (option != 0) {
+        if (repeat) {
             std::cout << "\n";
             system("pause");
         }
