@@ -4,6 +4,17 @@
 #include <string>
 #include <random>
 
+/* Kilder:
+* https://www.felixcloutier.com/x86/
+* https://www.cs.virginia.edu/%7Eevans/cs216/guides/x86.html
+* https://www.cs.umd.edu/class/fall2024/cmsc430/a86.html#%28part._stacks%29
+* https://www.cs.uaf.edu/2008/fall/cs441/lecture/10_07_float.html
+* http://www.infophysics.net/x87.pdf
+* https://docs.oracle.com/cd/E19120-01/open.solaris/817-5477/eoizy/index.html
+*
+* https://learn.microsoft.com/en-us/cpp/assembler/inline/writing-functions-with-inline-assembly?view=msvc-160
+*/
+
 int PromptOption();
 
 void AdditionOperations();

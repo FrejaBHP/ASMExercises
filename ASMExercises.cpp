@@ -1,16 +1,5 @@
 #include "ASMExercises.h"
 
-/* Kilder:
-* https://www.felixcloutier.com/x86/
-* https://www.cs.virginia.edu/%7Eevans/cs216/guides/x86.html
-* https://www.cs.umd.edu/class/fall2024/cmsc430/a86.html#%28part._stacks%29
-* https://www.cs.uaf.edu/2008/fall/cs441/lecture/10_07_float.html
-* http://www.infophysics.net/x87.pdf
-* https://docs.oracle.com/cd/E19120-01/open.solaris/817-5477/eoizy/index.html
-* 
-* https://learn.microsoft.com/en-us/cpp/assembler/inline/writing-functions-with-inline-assembly?view=msvc-160
-*/
-
 int main() {
     bool repeat = true;
 
@@ -19,22 +8,32 @@ int main() {
 
         switch (option) {
             case 1:
+                std::cout << "\x1b[2J\x1b[H"; // Clears console and resets "cursor"
+                std::cout << "1: Addition\n\n";
                 AdditionOperations();
                 break;
 
             case 2:
+                std::cout << "\x1b[2J\x1b[H";
+                std::cout << "2: General integer arithmetic\n\n";
                 Comparison();
                 break;
 
             case 3:
+                std::cout << "\x1b[2J\x1b[H";
+                std::cout << "3: Character counting\n\n";
                 CharCount();
                 break;
 
             case 4:
+                std::cout << "\x1b[2J\x1b[H";
+                std::cout << "4: Bubblesort\n\n";
                 BubbleSort();
                 break;
 
             case 5:
+                std::cout << "\x1b[2J\x1b[H";
+                std::cout << "5: Floating point multiplication\n\n";
                 FPArithmetic();
                 break;
 
@@ -46,7 +45,8 @@ int main() {
         }
 
         if (option != 0) {
-            std::cout << "\n\n";
+            std::cout << "\n";
+            system("pause");
         }
     }
 }
@@ -57,6 +57,7 @@ int PromptOption() {
     bool repeat = true;
     int option;
 
+    cout << "\x1b[2J\x1b[H";
     cout << "Which exercise would you like to access?\n";
     cout << "1 = Addition\n2 = General integer arithmetic\n3 = Character counting\n4 = Bubblesort\n5 = Floating point multiplication\n0 = Exit\n";
 
@@ -75,8 +76,6 @@ int PromptOption() {
             repeat = false;
         }
     }
-
-    cout << "\n";
 
     return option;
 }
