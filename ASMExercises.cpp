@@ -12,120 +12,73 @@
 */
 
 int main() {
-    FPArithmetic();
-}
+    bool repeat = true;
 
-void FPArithmetic() {
-    float num1;
-    float num2;
+    while (repeat) {
+        int option = PromptOption();
 
-    std::cout << "Enter first number: ";
-    std::cin >> num1;
+        switch (option) {
+            case 1:
+                AdditionOperations();
+                break;
 
-    std::cout << "Enter second number: ";
-    std::cin >> num2;
+            case 2:
+                Comparison();
+                break;
 
-    float result = fpA(num1, num2);
-    printf("%.3f * %.3f = %.3f", num1, num2, result);
-    std::cout << "\n";
-}
+            case 3:
+                CharCount();
+                break;
 
-void BubbleSort() {
-    std::random_device rnd;
-    std::mt19937 gen(rnd());
-    std::uniform_int_distribution<std::mt19937::result_type> amountOfNumbersRange(15, 30);
-    std::uniform_int_distribution<std::mt19937::result_type> numbersValueRange(0, 100);
-    
-    std::vector<int> numbersList(amountOfNumbersRange(gen));
+            case 4:
+                BubbleSort();
+                break;
 
-    std::cout << "Original array:\n";
-    for (size_t i = 0; i < numbersList.capacity(); i++) {
-        numbersList[i] = numbersValueRange(gen);
-        std::cout << std::to_string(numbersList[i]) + " ";
-    }
+            case 5:
+                FPArithmetic();
+                break;
 
-    bubbleSort(numbersList.data(), numbersList.capacity() - 1);
+            case 0:
+                repeat = false;
 
-    std::cout << "\n\nSorted array:\n";
-    for (size_t i = 0; i < numbersList.capacity(); i++) {
-        std::cout << std::to_string(numbersList[i]) + " ";
-    }
-    std::cout << "\n";
-}
+            default:
+                break;
+        }
 
-void CharCount() {
-    // Char is 1 byte
-    int letterArray[26] { 0 };
-
-    std::cout << "Enter string you want analysed: ";
-
-    std::string newstring;
-    std::getline(std::cin, newstring);
-
-    char* cStrPtr = new char[newstring.length() + 1];
-    strcpy_s(cStrPtr, newstring.length() + 1, newstring.c_str());
-
-    getCharsInString(cStrPtr, letterArray);
-
-    std::cout << "Letters used:\n";
-    for (size_t i = 0; i < std::size(letterArray); i++) {
-        if (letterArray[i] != 0) {
-            char letter{ char(65 + i) };
-            printf("%c: %d\n", letter, letterArray[i]);
+        if (option != 0) {
+            std::cout << "\n\n";
         }
     }
 }
 
-void Comparison() {
+int PromptOption() {
     using namespace std;
 
-    int num1;
-    int num2;
-    int operation;
-    int divRemainder = 0;
+    bool repeat = true;
+    int option;
 
-    cout << "Enter first integer: ";
-    cin >> num1;
+    cout << "Which exercise would you like to access?\n";
+    cout << "1 = Addition\n2 = General integer arithmetic\n3 = Character counting\n4 = Bubblesort\n5 = Floating point multiplication\n0 = Exit\n";
 
-    cout << "Enter second integer: ";
-    cin >> num2;
+    while (repeat) {
+        cin >> option;
 
-    cout << "Enter integer for operation (0 is +, 1 is -, 2 is *, 3 is /): ";
-    cin >> operation;
-
-    int result = numbers(num1, num2, operation, &divRemainder);
-
-    if (operation == 3) {
-        cout << "Result is " + to_string(result) + " with remainder " + to_string(divRemainder);
+        if (cin.fail()) {
+            cout << "Please enter a number\n";
+            cin.clear();
+            cin.ignore();
+        }
+        else if (option > 5 || option < 0) {
+            cout << "Please enter a valid number from 0 to 5\n";
+        }
+        else {
+            repeat = false;
+        }
     }
-    else {
-        cout << "Result is " + to_string(result);
-    }
 
-    /*
-    int result;
-    switch (operation) {
-        case 0:
-            result = num1 + num2;
-            break;
+    cout << "\n";
 
-        case 1:
-            result = num1 - num2;
-            break;
-
-        case 2:
-            result = num1 * num2;
-            break;
-
-        case 3:
-            result = num1 / num2;
-            divRemainder = num1 % num2;
-            break;
-
-        default:
-            break;
-    }
-    */
+    return option;
 }
 
 void AdditionOperations() {
@@ -157,8 +110,8 @@ int addNumbersInlineOffset(int num1, int num2) {
         ;push   ebp
         ;mov    ebp, esp
 
-        mov     eax, [ebp+8]
-        mov     ecx, [ebp+12]
+        mov     eax, [ebp + 8]
+        mov     ecx, [ebp + 12]
         add     eax, ecx
 
         ;pop    ebp
@@ -173,4 +126,126 @@ int addNumbersInlineNamed(int num1, int num2) {
         mov     ecx, num2
         add     eax, ecx
     }
+}
+
+// Performs arithmetic on two integers, depending on the value of the 'operation' variable, which is compared in ASM
+void Comparison() {
+    using namespace std;
+
+    int num1;
+    int num2;
+    int operation;
+    int divRemainder = 0;
+
+    cout << "Enter first integer: ";
+    cin >> num1;
+
+    cout << "Enter second integer: ";
+    cin >> num2;
+
+    cout << "Enter integer for operation (0 is +, 1 is -, 2 is *, 3 is /): ";
+    cin >> operation;
+
+    int result = numbers(num1, num2, operation, &divRemainder);
+
+    if (operation == 3) {
+        cout << "Result is " + to_string(result) + " with remainder " + to_string(divRemainder);
+    }
+    else {
+        cout << "Result is " + to_string(result);
+    }
+
+    /* Called ASM is equivalent to:
+    int result;
+    switch (operation) {
+        case 0:
+            result = num1 + num2;
+            break;
+
+        case 1:
+            result = num1 - num2;
+            break;
+
+        case 2:
+            result = num1 * num2;
+            break;
+
+        case 3:
+            result = num1 / num2;
+            divRemainder = num1 % num2;
+            break;
+
+        default:
+            break;
+    }
+    */
+}
+
+void CharCount() {
+    // Char is 1 byte
+    using namespace std;
+
+    int letterArray[26]{ 0 };
+
+    cout << "Enter string you want analysed: ";
+
+    cin.ignore();
+
+    string newstring;
+    getline(cin, newstring);
+
+    char* cStrPtr = new char[newstring.length() + 1];
+    strcpy_s(cStrPtr, newstring.length() + 1, newstring.c_str());
+
+    getCharsInString(cStrPtr, letterArray);
+
+    cout << "Letters used:\n";
+    for (size_t i = 0; i < size(letterArray); i++) {
+        if (letterArray[i] != 0) {
+            char letter{ char(65 + i) };
+            printf("%c: %d\n", letter, letterArray[i]);
+        }
+    }
+}
+
+void BubbleSort() {
+    using namespace std;
+
+    random_device rnd;
+    mt19937 gen(rnd());
+    uniform_int_distribution<mt19937::result_type> amountOfNumbersRange(15, 30);
+    uniform_int_distribution<mt19937::result_type> numbersValueRange(0, 100);
+
+    vector<int> numbersList(amountOfNumbersRange(gen));
+
+    cout << "Original array:\n";
+    for (size_t i = 0; i < numbersList.capacity(); i++) {
+        numbersList[i] = numbersValueRange(gen);
+        cout << to_string(numbersList[i]) + " ";
+    }
+
+    bubbleSort(numbersList.data(), numbersList.capacity() - 1);
+
+    cout << "\n\nSorted array:\n";
+    for (size_t i = 0; i < numbersList.capacity(); i++) {
+        cout << to_string(numbersList[i]) + " ";
+    }
+    cout << "\n";
+}
+
+void FPArithmetic() {
+    using namespace std;
+
+    float num1;
+    float num2;
+
+    cout << "Enter first number: ";
+    cin >> num1;
+
+    cout << "Enter second number: ";
+    cin >> num2;
+
+    float result = fpA(num1, num2);
+    printf("%.3f * %.3f = %.3f", num1, num2, result);
+    cout << "\n";
 }

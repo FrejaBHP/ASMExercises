@@ -4,6 +4,8 @@
 #include <string>
 #include <random>
 
+int PromptOption();
+
 void AdditionOperations();
 int addNumbersInlineOffset(int num1, int num2);
 int addNumbersInlineNamed(int num1, int num2);

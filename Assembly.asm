@@ -202,7 +202,7 @@ _fpA PROC
     ; In addition, since the return value is a float, it is not read from EAX either way, so using the regular registers can be skipped here
 
     ; A pop operation causes the ST(0) register to be marked empty and 
-    ; the stack pointer (TOP) in the x87 FPU control work to be incremented by 1
+    ; the stack pointer (TOP) in the x87 FPU Control Word to be incremented by 1
     ; fx
     ; R4 = 13,44 (ST(1))
     ; R3 = 59,14 (ST(0))
